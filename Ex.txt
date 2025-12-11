@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My home work Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      background-color: darksalmon;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: black;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 14px;
+      color: crimson;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+      background-color: cyan;
+      color: black;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      width: 48%;
+    }
+
+    input[type="button"]:hover,
+    input[type="submit"]:hover,
+    input[type="reset"]:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .range-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .range-value {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .file-label {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    
+    /* สไตล์สำหรับตารางเลือกสี (Color Palette) */
+    .color-palette {
+        display: flex;
+        flex-wrap: wrap; 
+        gap: 8px; 
+        margin-top: 10px;
+    }
+
+    .color-option {
+        width: 30px; 
+        height: 30px;
+        border: 2px solid transparent; 
+        cursor: pointer;
+        border-radius: 4px;
+        transition: transform 0.1s ease, border-color 0.1s ease;
+    }
+
+    .color-option:hover {
+        transform: scale(1.1); 
+    }
+
+    .color-option.selected {
+        border-color: black; 
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Register Form</h2>
+    <form id="myForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tel">Phone Number</label>
+        <input type="tel" id="tel" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" required>
+      </div>
+
+      <div class="form-group">
+        <label>Favorite Color</label>
+        <div class="color-palette" id="colorPalette">
+          </div>
+        <input type="hidden" id="selectedColor" value="#ff0000"> 
+      </div>
+
+      <div class="form-group">
+        <label for="terms">
+          <input type="checkbox" id="terms"> I agree to the terms and conditions
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="file-label" for="file">Upload Profile Picture</label>
+        <input type="file" id="file" accept="image/*">
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age (Range)</label>
+        <div class="range-container">
+          <input type="range" id="age" min="18" max="100" value="25">
+          <span class="range-value" id="rangeValue">25</span>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
+
+  <script>
+
+    const rangeInput = document.getElementById('age');
+    const rangeValue = document.getElementById('rangeValue');
+    rangeInput.addEventListener('input', function() {
+      rangeValue.textContent = rangeInput.value;
+    });
+
+    const colorPalette = document.getElementById('colorPalette');
+    const selectedColorInput = document.getElementById('selectedColor');
+    
+
+    const colors = [
+      '#FF0000', // Red
+      '#0000FF', // Blue
+      '#008000', // Green
+      '#FFA500', // Orange
+      '#800080', // Purple
+      '#000000', // Black
+      '#FFFFFF', // White
+      '#FFC0CB', // Pink
+      '#008080', // TEAL
+      '#A52A2A', // BROWN
+      '#00FF00'  // LIME GREEN
+    ]; 
+
+    colors.forEach(color => {
+      const colorOption = document.createElement('div');
+      colorOption.className = 'color-option';
+      colorOption.style.backgroundColor = color;
+      colorOption.dataset.color = color; 
+
+   
+      if (color === selectedColorInput.value) {
+          colorOption.classList.add('selected');
+      }
+
+  
+      colorOption.addEventListener('click', function() {
+    
+        document.querySelectorAll('.color-option').forEach(option => {
+          option.classList.remove('selected');
+        });
+
+        this.classList.add('selected');
+        
+      
+        selectedColorInput.value = this.dataset.color;
+      });
+
+      colorPalette.appendChild(colorOption);
+    });
+
+
+
+    document.getElementById('myForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const phone = document.getElementById('tel').value;
+      const dob = document.getElementById('dob').value;
+      
+ 
+      const color = selectedColorInput.value; 
+      
+      const terms = document.getElementById('terms').checked;
+      const file = document.getElementById('file').files[0];
+      const age = document.getElementById('age').value;
+
+      alert(`Form submitted with the following data:
+      Name: ${name}
+      Email: ${email}
+      Password: ${password}
+      Phone: ${phone}
+      Date of Birth: ${dob}
+      Favorite Color: ${color}
+      Age: ${age}
+      Terms agreed: ${terms ? 'Yes' : 'No'}
+      Profile Picture: ${file ? file.name : 'None'}`);
+    });
+    
+
+    document.getElementById('myForm').addEventListener('reset', function() {
+        setTimeout(() => {
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            const initialColor = selectedColorInput.value;
+            const initialOption = document.querySelector(`.color-option[data-color="${initialColor}"]`);
+            if (initialOption) {
+                initialOption.classList.add('selected');
+            }
+        }, 50); 
+    });
+  </script>
+</body>
+</html>
